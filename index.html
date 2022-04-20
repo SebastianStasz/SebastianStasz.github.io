@@ -38,11 +38,32 @@
         <div class="container-fluid">
 
             <div id="page-home" class="active">
-                <h1>Home</h1>
+                <p class="lead mt-4">Suma wydatków w tym miesiącu:</p>
+                <p class="h2">465 zł</p>
             </div>
 
             <div id="page-cashFlows" class="inactive">
-                <h1>Cash flows</h1>
+                <h1 class="mt-4 mb-4">Lista wydatków</h1>
+                <button onclick="toggleCashFlowFilter()" class="btn btn-tertiary mb-4">Filtruj</button>
+                <div id="cash-flow-filter">
+                    <div class="form-group">
+                        <label for="category">Kategoria:</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="transport">Transport</option>
+                            <option value="artykuły spożywcze">Artykuły spożywcze</option>
+                            <option value="dom">Dom</option>
+                            <option value="samochód">Samochód</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Data początkowa:</label>
+                        <input type="date" id="start-date" name="start-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">Data końcowa:</label>
+                        <input type="date" id="end-date" name="end-date" class="form-control">
+                    </div>
+                </div>
             </div>
 
             <div id="page-create" class="inactive">
@@ -103,19 +124,19 @@
                 <button id="cashFlows" type="button" class="btn btn-secondary button-inactive">
                     <div class="selector-holder">
                         <i class="material-icons">view_list</i>
-                        <span>Cash flows</span>
+                        <span>Lista</span>
                     </div>
                 </button>
                 <button id="create" type="button" class="btn btn-secondary button-inactive">
                     <div class="selector-holder">
                         <i class="material-icons">create</i>
-                        <span>Create</span>
+                        <span>Dodaj</span>
                     </div>
                 </button>
                 <button id="account" type="button" class="btn btn-secondary button-inactive">
                     <div class="selector-holder">
                         <i class="material-icons">account_circle</i>
-                        <span>Account</span>
+                        <span>Konto</span>
                     </div>
                 </button>
             </div>
@@ -123,6 +144,15 @@
 
         <script>
             document.getElementById('date').valueAsDate = new Date();
+
+            function toggleCashFlowFilter() {
+                var x = document.getElementById("cash-flow-filter");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
         </script>
 
         <script src="js/main.js"></script>
