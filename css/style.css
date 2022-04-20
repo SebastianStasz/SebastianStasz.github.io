@@ -73,3 +73,12 @@ body {
 .button-inactive{
     color: #000;
 }
+
+.assign-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90%;
+    height: 50px;
+    bottom: 80px;
+}

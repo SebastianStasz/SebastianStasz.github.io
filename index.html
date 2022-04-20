@@ -69,14 +69,14 @@
                         <label for="nazwa">Kwota:</label>
                         <input type="number" class="form-control" id="value" placeholder="Kwota" name="value">
                     </div>
-                    <input type="file" accept="image/*" capture="camera"/>
-                    <div class="mt-5">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-secondary btn-block" id="cancel-btn">Anuluj</button>
+                    <input type="file" accept="image/*" capture="camera" class="mt-2"/>
+                    <div class="mt-5 assign-bottom">
+                        <div class="row h-100">
+                            <div class="col h-100">
+                                <button class="btn btn-secondary btn-block h-100" id="cancel-btn">Anuluj</button>
                             </div>
-                            <div class="col">
-                                <button class="btn btn-primary btn-block" id="save-btn">Zapisz</button>
+                            <div class="col h-100">
+                                <button class="btn btn-primary btn-block h-100" id="save-btn">Zapisz</button>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,11 @@
             </div>
 
             <div id="page-account" class="inactive">
-                <h2>Account</h2>
+                <h1 class="mt-4 mb-4">Twoje konto</h1>
+                <p class="lead">
+                    <span class="font-weight-bold">Login:</span>
+                    TestLogin</p>
+                <button class="btn btn-primary btn-block assign-bottom" id="logout-btn">Wyloguj się</button>
             </div>
         </div>
 
