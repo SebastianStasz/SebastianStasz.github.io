@@ -12,9 +12,10 @@ const getExpenses = async () => {
         .where("user", "==", user)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            total += doc.data()["price"]
-            console.log(total)
-            console.log(doc.data()["price"])
+            let date = Date.parse(doc.data()["date"])
+            if (date >= firstDayOfMonth && date <= lastDayOfMonth) {
+                total += parseFloat(doc.data()["price"])
+            }
         });
     });
     content += total.toString();
