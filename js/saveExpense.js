@@ -21,6 +21,7 @@ const submitForm = async () => {
     const fileRef = storageRef.child(fileName);
     if (file) fileRef.put(file)
     await addExpense({name, price, user, category, date, fileName})
+    clearForm();
 };
 
 const submitBtn = document.getElementById("save-btn");
@@ -30,4 +31,15 @@ if (submitBtn) {
         submitForm,
         false
     );
+}
+
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", clearForm);
+
+function clearForm() {
+    document.getElementById("new-expense-name").value = "";
+    document.getElementById("new-expense-category").value = "transport";
+    document.getElementById("new-expense-date").valueAsDate = new Date();
+    document.getElementById("new-expense-price").value = "";
+    document.getElementById("new-expense-file").value = null;
 }
