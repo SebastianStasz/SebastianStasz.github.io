@@ -51,8 +51,9 @@
                     <div class="container-fluid">
 
                         <div id="page-home" class="active">
-                            <p class="lead mt-4">Suma wydatków w tym miesiącu:</p>
-                            <p class="h2">465 zł</p>
+                            <p class="lead mt-4" id="monthlyTotal"></p>
+
+                            <button id="refresh-btn" class="btn btn-tertiary mb-4">Odśwież</button>
                         </div>
 
                         <div id="page-cashFlows" class="inactive">
@@ -182,6 +183,7 @@
                             }
                         }
                     </script>
+                    <script src="js/getStatistics.js"></script>
                     <script src="js/saveExpense.js"></script>
                     <script src="js/getPhotos.js"></script>
                     <script src="js/readAndFilterExpenses.js"></script>

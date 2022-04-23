@@ -1,7 +1,10 @@
 const readExpenses = async () => {
     const user = firebase.auth().currentUser.email;
     let content = '<ul class="list-group" id="expenseslist">'
-    await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
+    await db.collection("expenses")
+        .where("user", "==", user)
+        .orderBy("date", Query.Direction.DESCENDING)
+        .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             content += `<li class="row m-1 p-2 rounded ${doc.data()["category"]}"><span class="font-weight-bold col">${doc.data()["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${doc.data()["price"]} zł</span>`
