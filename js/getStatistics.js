@@ -13,7 +13,7 @@ const getExpenses = async () => {
         .get().then((querySnapshot) => {
             var total = 0;
             querySnapshot.forEach((doc) => {
-                print(doc.data()["price"])
+                console.log(doc.data()["price"])
                 total += doc.data()["price"]
             });
             content += total.toString();
@@ -23,7 +23,7 @@ const getExpenses = async () => {
 }
 
 const refreshBtn = document.getElementById("refresh-btn");
-casflowsBtn.addEventListener("click", getExpenses, false)
+refreshBtn.addEventListener("click", getExpenses, false)
 
 
 $(document).ready(function(){
