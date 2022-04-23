@@ -5,6 +5,12 @@
         <title>PSM Project</title>
 
         <link rel="manifest" href="/manifest.json">
+        <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/common.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"/>
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="favicon.ico" type="image/x-icon"/>
         <link rel="apple-touch-icon" href="images/hello-icon-152.png">
@@ -31,130 +37,155 @@
     </head>
 
     <body>
-        <nav class="navbar fixed-top navbar-light bg-light justify-content-center">
-            <h2 class="navbar-brand mb-0">PSM - Project</h2>
-        </nav>
+        <div id="loading">Loading...</div>
+        <div id="loaded" class="hidden">
+            <div id="main">
+                <nav class="navbar fixed-top navbar-light bg-light justify-content-center">
+                    <h2 class="navbar-brand mb-0">PSM - Project</h2>
+                </nav>
+                <div id="user-signed-in" class="hidden">
 
-        <div class="container-fluid">
+                    <div class="container-fluid">
 
-            <div id="page-home" class="active">
-                <p class="lead mt-4">Suma wydatków w tym miesiącu:</p>
-                <p class="h2">465 zł</p>
-            </div>
+                        <div id="page-home" class="active">
+                            <p class="lead mt-4">Suma wydatków w tym miesiącu:</p>
+                            <p class="h2">465 zł</p>
+                        </div>
 
-            <div id="page-cashFlows" class="inactive">
-                <h1 class="mt-4 mb-4">Lista wydatków</h1>
-                <button onclick="toggleCashFlowFilter()" class="btn btn-tertiary mb-4">Filtruj</button>
-                <div id="cash-flow-filter">
-                    <div class="form-group">
-                        <label for="category">Kategoria:</label>
-                        <select id="category" name="category" class="form-control">
-                            <option value="transport">Transport</option>
-                            <option value="artykuły spożywcze">Artykuły spożywcze</option>
-                            <option value="dom">Dom</option>
-                            <option value="samochód">Samochód</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="start-date">Data początkowa:</label>
-                        <input type="date" id="start-date" name="start-date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="end-date">Data końcowa:</label>
-                        <input type="date" id="end-date" name="end-date" class="form-control">
-                    </div>
-                </div>
-            </div>
-
-            <div id="page-create" class="inactive">
-                <h1 class="mt-4 mb-4">Wydatek</h1>
-                <div>
-                    <div class="form-group">
-                        <label for="category">Kategoria:</label>
-                        <select id="category" name="category" class="form-control">
-                            <option value="transport">Transport</option>
-                            <option value="artykuły spożywcze">Artykuły spożywcze</option>
-                            <option value="dom">Dom</option>
-                            <option value="samochód">Samochód</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Data:</label>
-                        <input type="date" id="date" name="date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Nazwa:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Nazwa wydatku" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="nazwa">Kwota:</label>
-                        <input type="number" class="form-control" id="value" placeholder="Kwota" name="value">
-                    </div>
-                    <input type="file" accept="image/*" capture="camera" class="mt-2"/>
-                    <div class="mt-5 assign-bottom">
-                        <div class="row h-100">
-                            <div class="col h-100">
-                                <button class="btn btn-secondary btn-block h-100" id="cancel-btn">Anuluj</button>
-                            </div>
-                            <div class="col h-100">
-                                <button class="btn btn-primary btn-block h-100" id="save-btn">Zapisz</button>
+                        <div id="page-cashFlows" class="inactive">
+                            <h1 class="mt-4 mb-4">Lista wydatków</h1>
+                            <button onclick="toggleCashFlowFilter()" class="btn btn-tertiary mb-4">Filtruj</button>
+                            <div id="cash-flow-filter">
+                                <div class="form-group">
+                                    <label for="category">Kategoria:</label>
+                                    <select id="category" name="category" class="form-control">
+                                        <option value="transport">Transport</option>
+                                        <option value="artykuły spożywcze">Artykuły spożywcze</option>
+                                        <option value="dom">Dom</option>
+                                        <option value="samochód">Samochód</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="start-date">Data początkowa:</label>
+                                    <input type="date" id="start-date" name="start-date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="end-date">Data końcowa:</label>
+                                    <input type="date" id="end-date" name="end-date" class="form-control">
+                                </div>
                             </div>
                         </div>
+
+                        <div id="page-create" class="inactive">
+                            <h1 class="mt-4 mb-4">Wydatek</h1>
+                            <div>
+                                <div class="form-group">
+                                    <label for="category">Kategoria:</label>
+                                    <select id="category" name="category" class="form-control">
+                                        <option value="transport">Transport</option>
+                                        <option value="artykuły spożywcze">Artykuły spożywcze</option>
+                                        <option value="dom">Dom</option>
+                                        <option value="samochód">Samochód</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Data:</label>
+                                    <input type="date" id="date" name="date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Nazwa:</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Nazwa wydatku"
+                                           name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nazwa">Kwota:</label>
+                                    <input type="number" class="form-control" id="value" placeholder="Kwota"
+                                           name="value">
+                                </div>
+                                <input type="file" accept="image/*" capture="camera" class="mt-2"/>
+                                <div class="mt-5 assign-bottom">
+                                    <div class="row h-100">
+                                        <div class="col h-100">
+                                            <button class="btn btn-secondary btn-block h-100" id="cancel-btn">Anuluj
+                                            </button>
+                                        </div>
+                                        <div class="col h-100">
+                                            <button class="btn btn-primary btn-block h-100" id="save-btn">Zapisz
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="page-account" class="inactive">
+                            <h1 class="mt-4 mb-4">Twoje konto</h1>
+                            <p class="lead">
+                                <span class="font-weight-bold">Login:</span>
+                                <span id="email"></span>
+                                <br>
+                                <button class="btn btn-secondary" id="delete-account">Usuń konto</button>
+                                <button class="btn btn-primary btn-block assign-bottom" id="sign-out">Wyloguj się
+                                </button>
+                        </div>
+                    </div>
+
+                    <footer class="footer">
+                        <div id="buttonGroup" class="btn-group selectors" role="group" aria-label="Basic example">
+                            <button id="home" type="button" class="button-active">
+                                <div class="selector-holder">
+                                    <i class="material-icons">home</i>
+                                    <span>Home</span>
+                                </div>
+                            </button>
+                            <button id="cashFlows" type="button" class="button-inactive">
+                                <div class="selector-holder">
+                                    <i class="material-icons">view_list</i>
+                                    <span>Lista</span>
+                                </div>
+                            </button>
+                            <button id="create" type="button" class="button-inactive">
+                                <div class="selector-holder">
+                                    <i class="material-icons">create</i>
+                                    <span>Dodaj</span>
+                                </div>
+                            </button>
+                            <button id="account" type="button" class="button-inactive">
+                                <div class="selector-holder">
+                                    <i class="material-icons">account_circle</i>
+                                    <span>Konto</span>
+                                </div>
+                            </button>
+                        </div>
+                    </footer>
+
+                    <script>
+                        document.getElementById('date').valueAsDate = new Date();
+
+                        function toggleCashFlowFilter() {
+                            var x = document.getElementById("cash-flow-filter");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
+                        }
+                    </script>
+
+                    <script src="js/main.js"></script>
+
+                </div>
+                <div id="user-signed-out" class="hidden">
+                    <p>
+                        <button hidden id="sign-in-with-redirect">Sign In with Redirect</button>
+                        <button hidden id="sign-in-with-popup">Sign In with Popup</button>
+                    </p>
+                    <div id="firebaseui-spa">
+                        <div id="firebaseui-container"></div>
                     </div>
                 </div>
             </div>
-
-            <div id="page-account" class="inactive">
-                <h1 class="mt-4 mb-4">Twoje konto</h1>
-                <p class="lead">
-                    <span class="font-weight-bold">Login:</span>
-                    TestLogin</p>
-                <button class="btn btn-primary btn-block assign-bottom" id="logout-btn">Wyloguj się</button>
-            </div>
         </div>
-
-        <footer class="footer">
-            <div id="buttonGroup" class="btn-group selectors" role="group" aria-label="Basic example">
-                <button id="home" type="button" class="btn btn-secondary button-active">
-                    <div class="selector-holder">
-                        <i class="material-icons">home</i>
-                        <span>Home</span>
-                    </div>
-                </button>
-                <button id="cashFlows" type="button" class="btn btn-secondary button-inactive">
-                    <div class="selector-holder">
-                        <i class="material-icons">view_list</i>
-                        <span>Lista</span>
-                    </div>
-                </button>
-                <button id="create" type="button" class="btn btn-secondary button-inactive">
-                    <div class="selector-holder">
-                        <i class="material-icons">create</i>
-                        <span>Dodaj</span>
-                    </div>
-                </button>
-                <button id="account" type="button" class="btn btn-secondary button-inactive">
-                    <div class="selector-holder">
-                        <i class="material-icons">account_circle</i>
-                        <span>Konto</span>
-                    </div>
-                </button>
-            </div>
-        </footer>
-
-        <script>
-            document.getElementById('date').valueAsDate = new Date();
-
-            function toggleCashFlowFilter() {
-                var x = document.getElementById("cash-flow-filter");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                } else {
-                    x.style.display = "none";
-                }
-            }
-        </script>
-
-        <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
     </body>
 </html>

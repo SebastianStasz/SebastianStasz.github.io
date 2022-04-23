@@ -82,3 +82,7 @@ body {
     height: 50px;
     bottom: 80px;
 }
+
+#firebaseui-container {
+    margin-top: 200px;
+}
