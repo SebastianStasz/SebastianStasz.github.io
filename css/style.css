@@ -113,3 +113,7 @@ body {
 .samochód {
     background: #FFECB3;
 }
+
+hr.dashed {
+    border-top: 2px dashed #999;
+}
