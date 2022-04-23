@@ -27,7 +27,7 @@ function changePage(){
     var pageId = "page-"+this.id;
     var page = document.getElementById(pageId);
     var pageSelector = document.getElementById(this.id);
-    
+
     if(page.classList.contains("active")){
         return;
     }
