@@ -14,8 +14,6 @@ function getButtons() {
     return ["home", "cashFlows", "create", "account"];
 }
 
-import {calcArea, getExpenses} from './getStatistics';
-
 window.onload = function(){
     var pageIdList = getButtons();
     pageIdList.forEach(function(page){
@@ -30,8 +28,6 @@ function changePage(){
     var page = document.getElementById(pageId);
     var pageSelector = document.getElementById(this.id);
 
-    await getExpenses()
-    
     if(page.classList.contains("active")){
         return;
     }

@@ -29,5 +29,3 @@ refreshBtn.addEventListener("click", getExpenses, false)
 window.onload = function() {
     await getExpenses();
 };
-
-export {getExpenses};
