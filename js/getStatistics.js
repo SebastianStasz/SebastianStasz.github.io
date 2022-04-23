@@ -26,6 +26,15 @@ const getExpenses = async () => {
 const refreshBtn = document.getElementById("refresh-btn");
 refreshBtn.addEventListener("click", getExpenses, false)
 
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+  
+async function loadStats() {
+    await delay(1500);
+    getExpenses();
+}
+
 window.onload = function() {
-    refreshBtn.click();
+    loadStats();
 };
