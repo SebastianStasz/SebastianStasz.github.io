@@ -1,6 +1,6 @@
 const getExpenses = async () => {
     const user = firebase.auth().currentUser.email;
-    let content = '<p class="lead mt-4" id="monthlyTotal">Suma wydatków w tym miesiącu:</p><p class="h2">'
+    let content = '<div id="monthlyTotal"><p class="lead mt-4">Suma wydatków w tym miesiącu:</p><p class="h2">'
 
     let date = new Date(), y = date.getFullYear(), m = date.getMonth();
     let firstDayOfMonth = new Date(y, m, 1);
@@ -19,7 +19,7 @@ const getExpenses = async () => {
         });
     });
     content += total.toString();
-    content +=' zł</p>'
+    content +=' zł</p></div>'
     $("#monthlyTotal").replaceWith(content)
 }
 
