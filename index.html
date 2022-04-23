@@ -7,10 +7,13 @@
         <link rel="manifest" href="/manifest.json">
         <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/common.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-storage-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"/>
+        <script src="js/config.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/db.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="favicon.ico" type="image/x-icon"/>
         <link rel="apple-touch-icon" href="images/hello-icon-152.png">
@@ -58,7 +61,7 @@
                             <div id="cash-flow-filter">
                                 <div class="form-group">
                                     <label for="category">Kategoria:</label>
-                                    <select id="category" name="category" class="form-control">
+                                    <select id="category" onclick="filterExpenses()" name="category" class="form-control">
                                         <option value="transport">Transport</option>
                                         <option value="artykuły spożywcze">Artykuły spożywcze</option>
                                         <option value="dom">Dom</option>
@@ -73,6 +76,12 @@
                                     <label for="end-date">Data końcowa:</label>
                                     <input type="date" id="end-date" name="end-date" class="form-control">
                                 </div>
+                                <div id="expenseslist">test</div>
+                                <div id="overlayDiv" style="display: none">
+                                    <button onclick="handleClosePhoto()">CLOSE PHOTO</button>
+                                    <br>
+                                <img src="" id="myimg" class="img-fluid">
+                                </div>
                             </div>
                         </div>
 
@@ -80,8 +89,8 @@
                             <h1 class="mt-4 mb-4">Wydatek</h1>
                             <div>
                                 <div class="form-group">
-                                    <label for="category">Kategoria:</label>
-                                    <select id="category" name="category" class="form-control">
+                                    <label for="new-expense-category">Kategoria:</label>
+                                    <select id="new-expense-category" name="category" class="form-control">
                                         <option value="transport">Transport</option>
                                         <option value="artykuły spożywcze">Artykuły spożywcze</option>
                                         <option value="dom">Dom</option>
@@ -89,20 +98,21 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="date">Data:</label>
-                                    <input type="date" id="date" name="date" class="form-control">
+                                    <label for="new-expense-date">Data:</label>
+                                    <input type="date" id="new-expense-date" name="date" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Nazwa:</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Nazwa wydatku"
+                                    <label for="new-expense-name">Nazwa:</label>
+                                    <input type="text" class="form-control" id="new-expense-name"
+                                           placeholder="Nazwa wydatku"
                                            name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="nazwa">Kwota:</label>
-                                    <input type="number" class="form-control" id="value" placeholder="Kwota"
+                                    <label for="new-expense-price">Kwota:</label>
+                                    <input type="number" class="form-control" id="new-expense-price" placeholder="Kwota"
                                            name="value">
                                 </div>
-                                <input type="file" accept="image/*" capture="camera" class="mt-2"/>
+                                <input type="file" accept="image/*" capture="camera" class="mt-2" id="new-expense-file"/>
                                 <div class="mt-5 assign-bottom">
                                     <div class="row h-100">
                                         <div class="col h-100">
@@ -160,7 +170,7 @@
                     </footer>
 
                     <script>
-                        document.getElementById('date').valueAsDate = new Date();
+                        document.getElementById('new-expense-date').valueAsDate = new Date();
 
                         function toggleCashFlowFilter() {
                             var x = document.getElementById("cash-flow-filter");
@@ -171,7 +181,9 @@
                             }
                         }
                     </script>
-
+                    <script src="js/saveExpense.js"></script>
+                    <script src="js/getPhotos.js"></script>
+                    <script src="js/readAndFilterExpenses.js"></script>
                     <script src="js/main.js"></script>
 
                 </div>
