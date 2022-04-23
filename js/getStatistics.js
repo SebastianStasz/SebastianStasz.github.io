@@ -6,18 +6,18 @@ const getExpenses = async () => {
     let firstDayOfMonth = new Date(y, m, 1);
     let lastDayOfMonth = new Date(y, m + 1, 0);
 
+    var total = 0;
+
     await db.collection("expenses")
         .where("user", "==", user)
-        .where('date', '>=', firstDayOfMonth)
-        .where('date', '<=', lastDayOfMonth)
         .get().then((querySnapshot) => {
-            var total = 0;
-            querySnapshot.forEach((doc) => {
-                console.log(doc.data()["price"])
-                total += doc.data()["price"]
-            });
-            content += total.toString();
+        querySnapshot.forEach((doc) => {
+            total += doc.data()["price"]
+            console.log(total)
+            console.log(doc.data()["price"])
+        });
     });
+    content += total.toString();
     content +=' zł</p>'
     $("#monthlyTotal").replaceWith(content)
 }
