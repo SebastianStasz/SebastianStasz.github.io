@@ -26,7 +26,8 @@ const getExpenses = async () => {
 const refreshBtn = document.getElementById("refresh-btn");
 refreshBtn.addEventListener("click", getExpenses, false)
 
+window.onload = function() {
+    await getExpenses();
+};
 
-$(document).ready(function(){
-    getExpenses();
-});
+export {getExpenses};
