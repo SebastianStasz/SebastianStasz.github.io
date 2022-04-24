@@ -27,10 +27,10 @@ const readExpenses = async () => {
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
             if (endDate != null && endDate < expenseDate) { return }
-
-            content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
-            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
-            content += `<span>${expenseDate.toLocaleDateString("en-US")}</span>`
+            content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><div class="d-flex justify-content-between"><span class="font-weight-bold col">${data["name"]}</span>`
+            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span></div>`
+            content += `<p>${expenseDate.toLocaleDateString("en-US")}</p>`
+            content += `<input type='button' value='Delete' class='delete float-right btn btn-secondary' onclick='delete_expense("${doc.id}")'>`;
             if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
             content += `</li>`
         });
@@ -44,7 +44,7 @@ function resetExpenseFilters() {
     document.getElementById("start-date").value = null;
     document.getElementById("end-date").value = null;
     readExpenses();
-}
+}  
 
 const casflowsBtn = document.getElementById("cashFlows");
 const applyFiltersBtn = document.getElementById("applyFilters-btn");
@@ -53,3 +53,8 @@ const resetFiltersBtn = document.getElementById("resetFilters-btn");
 casflowsBtn.addEventListener("click", readExpenses, false)
 applyFiltersBtn.addEventListener("click", readExpenses, false)
 resetFiltersBtn.addEventListener("click", resetExpenseFilters, false)
+
+function delete_expense(id) { 
+    db.collection('expenses').doc(id).delete();
+    readExpenses();
+}

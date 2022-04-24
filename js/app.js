@@ -108,7 +108,6 @@ var signInWithPopup = function() {
 var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
-  document.getElementById('name').textContent = user.displayName;
   document.getElementById('email').textContent = user.email;
   document.getElementById("refresh-btn").click();
 };
@@ -184,31 +183,33 @@ var initApp = function() {
         deleteAccount();
       });
 
-  document.getElementById('recaptcha-normal').addEventListener(
-      'change', handleConfigChange);
-  document.getElementById('recaptcha-invisible').addEventListener(
-      'change', handleConfigChange);
-  // Check the selected reCAPTCHA mode.
-  document.querySelector(
-      'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]')
-      .checked = true;
+  // document.getElementById('recaptcha-normal').addEventListener(
+  //     'change', handleConfigChange);
+  // document.getElementById('recaptcha-invisible').addEventListener(
+  //     'change', handleConfigChange);
 
-  document.getElementById('email-signInMethod-password').addEventListener(
-      'change', handleConfigChange);
-  document.getElementById('email-signInMethod-emailLink').addEventListener(
-      'change', handleConfigChange);
+  // Check the selected reCAPTCHA mode.
+  // document.querySelector(
+  //     'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]')
+  //     .checked = true;
+
+  // document.getElementById('email-signInMethod-password').addEventListener(
+  //     'change', handleConfigChange);
+  // document.getElementById('email-signInMethod-emailLink').addEventListener(
+  //     'change', handleConfigChange);
+
   // Check the selected email signInMethod mode.
-  document.querySelector(
-      'input[name="emailSignInMethod"][value="' + getEmailSignInMethod() + '"]')
-      .checked = true;
-  document.getElementById('email-disableSignUp-status').addEventListener(
-      'change', handleConfigChange);
-  document.getElementById("email-disableSignUp-status").checked =
-      getDisableSignUpStatus();  
-  document.getElementById('admin-restricted-operation-status').addEventListener(
-      'change', handleConfigChange);
-  document.getElementById("admin-restricted-operation-status").checked =
-      getAdminRestrictedOperationStatus();  
+  // document.querySelector(
+  //     'input[name="emailSignInMethod"][value="' + getEmailSignInMethod() + '"]')
+  //     .checked = true;
+  // document.getElementById('email-disableSignUp-status').addEventListener(
+  //     'change', handleConfigChange);
+  // document.getElementById("email-disableSignUp-status").checked =
+  //     getDisableSignUpStatus();  
+  // document.getElementById('admin-restricted-operation-status').addEventListener(
+  //     'change', handleConfigChange);
+  // document.getElementById("admin-restricted-operation-status").checked =
+  //     getAdminRestrictedOperationStatus();  
 };
 
 window.addEventListener('load', initApp);
