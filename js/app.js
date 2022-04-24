@@ -33,6 +33,7 @@ function getUiConfig() {
               'New User' : 'Existing User';
         }
         // Do not redirect.
+        initApp();
         return false;
       }
     },
@@ -126,7 +127,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('loaded').style.display = 'block';
   user ? handleSignedInUser(user) : handleSignedOutUser();
-  initApp();
 });
 
 var deleteAccount = function() {
