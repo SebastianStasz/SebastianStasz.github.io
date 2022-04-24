@@ -27,7 +27,6 @@ const readExpenses = async () => {
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
             if (endDate != null && endDate < expenseDate) { return }
-            console.log(doc.id)
             content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
             content += `<span>${expenseDate.toLocaleDateString("en-US")}</span>`
@@ -56,7 +55,6 @@ applyFiltersBtn.addEventListener("click", readExpenses, false)
 resetFiltersBtn.addEventListener("click", resetExpenseFilters, false)
 
 function delete_expense(id) { 
-    console.log("delete")
-    console.log(id);
     db.collection('expenses').doc(id).delete();
+    readExpenses();
 }
