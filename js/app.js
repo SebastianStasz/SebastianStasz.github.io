@@ -33,7 +33,6 @@ function getUiConfig() {
               'New User' : 'Existing User';
         }
         // Do not redirect.
-        initApp();
         return false;
       }
     },
@@ -109,7 +108,6 @@ var signInWithPopup = function() {
 var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
-  document.getElementById('name').textContent = user.displayName;
   document.getElementById('email').textContent = user.email;
   console.log("Refresh")
   document.getElementById("refresh-btn").click();
