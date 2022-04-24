@@ -1,13 +1,21 @@
 const readExpenses = async () => {
     const user = firebase.auth().currentUser.email;
     const category = document.getElementById("category-filter").value;
-    var startDate = new Date(Date.parse(document.getElementById("start-date").value))
-    var startDate = new Date(Date.parse(document.getElementById("end-date").value))
+    const startDateValue = document.getElementById("start-date").value;
+    const endDateValue = document.getElementById("end-date").value;
     let content = '<ul class="list-group" id="expenseslist">'
 
-    console.log(startDate)
-    if (startDate != "") { startDate.setHours(0,0,0,0) }
-    if (endDate != "") { endDate.setHours(0,0,0,0) }
+    var startDate = null
+    var endDate = null
+
+    if (startDateValue != "") { 
+        startDate = new Date(Date.parse(startDateValue));
+        startDate.setHours(0,0,0,0);
+    }
+    if (endDateValue != "") {
+        startDate = new Date(Date.parse(endDateValue));
+        endDate.setHours(0,0,0,0);
+    }
     
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -20,9 +28,9 @@ const readExpenses = async () => {
             console.log(expenseDate);
             console.log(startDate > expenseDate);
 
-            console.log(startDate != "");
+            console.log(startDate != null);
             if (category != "none" && category != expenseCategory) { return }
-            console.log(startDate != "" && startDate > expenseDate);
+            console.log(startDate != null && startDate > expenseDate);
             if (startDate != "" && startDate > expenseDate) { return }
             // if (endDate == null && endDate < expenseDate) { return }
 
