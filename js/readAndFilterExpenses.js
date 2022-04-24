@@ -56,5 +56,5 @@ applyFiltersBtn.addEventListener("click", readExpenses, false)
 resetFiltersBtn.addEventListener("click", resetExpenseFilters, false)
 
 function delete_expense(id) { 
-    await db.collection('expenses').doc(id).delete();
+    db.collection('expenses').doc(id).delete();
 }
