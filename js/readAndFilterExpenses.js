@@ -5,8 +5,8 @@ const readExpenses = async () => {
     var endDate = document.getElementById("end-date").value;
     let content = '<ul class="list-group" id="expenseslist">'
 
-    if (startDate != null) { startDate.toDate }
-    if (endDate != null) { endDate.toDate }
+    if (startDate != "") { startDate.toDate }
+    if (endDate != "") { endDate.toDate }
     
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
