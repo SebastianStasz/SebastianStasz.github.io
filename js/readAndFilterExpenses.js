@@ -1,12 +1,13 @@
 const readExpenses = async () => {
     const user = firebase.auth().currentUser.email;
     const category = document.getElementById("category-filter").value;
-    var startDate = document.getElementById("start-date").value;
-    var endDate = document.getElementById("end-date").value;
+    var startDate = new Date(Date.parse(document.getElementById("start-date").value))
+    var startDate = new Date(Date.parse(document.getElementById("end-date").value))
     let content = '<ul class="list-group" id="expenseslist">'
 
-    if (startDate != "") { startDate.toDate }
-    if (endDate != "") { endDate.toDate }
+    console.log(startDate)
+    if (startDate != "") { startDate.setHours(0,0,0,0) }
+    if (endDate != "") { endDate.setHours(0,0,0,0) }
     
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
