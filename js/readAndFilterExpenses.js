@@ -4,15 +4,15 @@ const readExpenses = async () => {
     var startDate = document.getElementById("start-date").value;
     var endDate = document.getElementById("end-date").value;
     let content = '<ul class="list-group" id="expenseslist">'
-    startDate.setHours(0,0,0,0);
-    endDate.setHours(0,0,0,0);
+    startDate.toDate().setHours(0,0,0,0);
+    endDate.toDate().setHours(0,0,0,0);
     
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let data = doc.data()
             let expenseDate = Date.parse(data["date"])
             let expenseCategory = data["category"]
-            expenseDate.setHours(0,0,0,0);
+            expenseDate.toDate().setHours(0,0,0,0);
 
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
