@@ -5,6 +5,8 @@ const getExpenses = async () => {
     let date = new Date(), y = date.getFullYear(), m = date.getMonth();
     let firstDayOfMonth = new Date(y, m, 1);
     let lastDayOfMonth = new Date(y, m + 1, 0);
+    firstDayOfMonth.setHours(0,0,0,0);
+    lastDayOfMonth.setHours(0,0,0,0);
 
     var total = 0;
 
@@ -13,6 +15,7 @@ const getExpenses = async () => {
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let date = Date.parse(doc.data()["date"])
+            date.setHours(0,0,0,0);
             if (date >= firstDayOfMonth && date <= lastDayOfMonth) {
                 total += parseFloat(doc.data()["price"])
             }
