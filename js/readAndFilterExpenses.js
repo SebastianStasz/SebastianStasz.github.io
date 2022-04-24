@@ -31,7 +31,7 @@ const readExpenses = async () => {
             content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
             content += `<span>${expenseDate.toLocaleDateString("en-US")}</span>`
-            content += `<button onclick="delete_expense("${doc.id}")">Delete</button>`
+            content += "<button onclick='delete_expense("+doc.id+")'>Delete</button>"
             if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
             content += `</li>`
         });
