@@ -126,6 +126,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('loaded').style.display = 'block';
   user ? handleSignedInUser(user) : handleSignedOutUser();
+  initApp();
 });
 
 var deleteAccount = function() {
@@ -212,4 +213,4 @@ var initApp = function() {
       getAdminRestrictedOperationStatus();  
 };
 
-window.addEventListener('load', initApp);
+// window.addEventListener('load', initApp);
