@@ -11,16 +11,18 @@ const readExpenses = async () => {
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let data = doc.data()
-            console.log(data["date"]);
-            console.log((Date.parse(data["date"])));
-            console.log(new Date((Date.parse(data["date"]))));
             var expenseDate = new Date(Date.parse(data["date"]));
             let expenseCategory = data["category"]
             expenseDate.setHours(0,0,0,0);
 
+            console.log(startDate);
+            console.log(endDate);
+
+            console.log(startDate != null);
             if (category != "none" && category != expenseCategory) { return }
+            console.log(startDate != null && startDate > expenseDate);
             if (startDate != null && startDate > expenseDate) { return }
-            if (endDate != null && endDate < expenseDate) { return }
+            // if (endDate == null && endDate < expenseDate) { return }
 
             content += `<li class="row m-1 p-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
