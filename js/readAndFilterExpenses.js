@@ -14,7 +14,7 @@ const readExpenses = async () => {
                 content += `<span hidden>${data["date"]}</span>`
                 if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
                 content += `</li>`
-            } else if (category == doc.data["category"]) {
+            } else if (category == data["category"]) {
                 content += `<li class="row m-1 p-2 rounded ${data["category"]}"><span class="font-weight-bold col">${data["name"]}</span>`
                 content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
                 content += `<span hidden>${data["date"]}</span>`
