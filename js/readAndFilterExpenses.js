@@ -27,12 +27,12 @@ const readExpenses = async () => {
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
             if (endDate != null && endDate < expenseDate) { return }
-            content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
-            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
-            content += `<span>${expenseDate.toLocaleDateString("en-US")}</span>`
+            content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><div><p><span class="font-weight-bold col">${data["name"]}</span>`
+            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span></p>`
+            content += `<p>${expenseDate.toLocaleDateString("en-US")}</p>`
             content += `<input type='button' value='Delete' class='delete' onclick='delete_expense("${doc.id}")'>`;
             if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
-            content += `</li>`
+            content += `</div></li>`
         });
     });
     content +='</ul>'
