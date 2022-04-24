@@ -109,7 +109,6 @@ var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
   document.getElementById('email').textContent = user.email;
-  console.log("Refresh")
   document.getElementById("refresh-btn").click();
 };
 
@@ -211,4 +210,4 @@ var initApp = function() {
       getAdminRestrictedOperationStatus();  
 };
 
-// window.addEventListener('load', initApp);
+window.addEventListener('load', initApp);
