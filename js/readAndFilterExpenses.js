@@ -11,7 +11,10 @@ const readExpenses = async () => {
     await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let data = doc.data()
-            var expenseDate = new Date(data["date"]);
+            console.log(data["date"]);
+            console.log((Date.parse(data["date"])));
+            console.log(new Date((Date.parse(data["date"]))));
+            var expenseDate = new Date(Date.parse(data["date"]));
             let expenseCategory = data["category"]
             expenseDate.toDate.setHours(0,0,0,0);
 
