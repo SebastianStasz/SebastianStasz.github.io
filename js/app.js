@@ -110,6 +110,7 @@ var handleSignedInUser = function(user) {
   document.getElementById('user-signed-out').style.display = 'none';
   document.getElementById('name').textContent = user.displayName;
   document.getElementById('email').textContent = user.email;
+  console.log("Refresh")
   document.getElementById("refresh-btn").click();
 };
 
