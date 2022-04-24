@@ -24,15 +24,9 @@ const readExpenses = async () => {
             let expenseCategory = data["category"]
             expenseDate.setHours(0,0,0,0);
 
-            console.log(startDate);
-            console.log(expenseDate);
-            console.log(startDate > expenseDate);
-
-            console.log(startDate != null);
             if (category != "none" && category != expenseCategory) { return }
-            console.log(startDate != null && startDate > expenseDate);
-            if (startDate != "" && startDate > expenseDate) { return }
-            // if (endDate == null && endDate < expenseDate) { return }
+            if (startDate != null && startDate > expenseDate) { return }
+            if (endDate != null && endDate < expenseDate) { return }
 
             content += `<li class="row m-1 p-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
