@@ -109,14 +109,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="new-expense-name">Nazwa:</label>
-                                    <input type="text" class="form-control" id="new-expense-name"
-                                           placeholder="Nazwa wydatku"
-                                           name="name">
+                                    <input type="text" class="form-control" id="new-expense-name" placeholder="Nazwa wydatku" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="new-expense-price">Kwota:</label>
-                                    <input type="number" class="form-control" id="new-expense-price" placeholder="Kwota"
-                                           name="value">
+                                    <input type="number" class="form-control" id="new-expense-price" placeholder="Kwota" name="value">
                                 </div>
                                 <input type="file" accept="image/*" capture="camera" class="mt-2" id="new-expense-file"/>
                                 <div class="mt-5 assign-bottom">
@@ -143,6 +140,9 @@
                                 <button class="btn btn-secondary" id="delete-account">Usuń konto</button>
                                 <button class="btn btn-primary btn-block assign-bottom" id="sign-out">Wyloguj się
                                 </button>
+                                <br>
+                                <button id="enableNotifications-btn" class="btn btn-tertiary">Włącz powiadomienia</button>
+                            </p>
                         </div>
                     </div>
 
@@ -189,6 +189,7 @@
 
                         toggleCashFlowFilter();
                     </script>
+                    <script src="js/notifications.js"></script>
                     <script src="js/getStatistics.js"></script>
                     <script src="js/saveExpense.js"></script>
                     <script src="js/getPhotos.js"></script>
