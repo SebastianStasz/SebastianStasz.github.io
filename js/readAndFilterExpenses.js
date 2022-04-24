@@ -13,7 +13,7 @@ const readExpenses = async () => {
         startDate.setHours(0,0,0,0);
     }
     if (endDateValue != "") {
-        startDate = new Date(Date.parse(endDateValue));
+        endDate = new Date(Date.parse(endDateValue));
         endDate.setHours(0,0,0,0);
     }
     
