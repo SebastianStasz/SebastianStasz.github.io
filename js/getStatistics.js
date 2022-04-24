@@ -24,4 +24,6 @@ const getExpenses = async () => {
 }
 
 const refreshBtn = document.getElementById("refresh-btn");
+const homeBtn = document.getElementById("home");
 refreshBtn.addEventListener("click", getExpenses, false)
+homeBtn.addEventListener("click", getExpenses, false)

@@ -1,43 +1,55 @@
 const readExpenses = async () => {
     const user = firebase.auth().currentUser.email;
+    const category = document.getElementById("category-filter").value;
+    const startDateValue = document.getElementById("start-date").value;
+    const endDateValue = document.getElementById("end-date").value;
     let content = '<ul class="list-group" id="expenseslist">'
-    await db.collection("expenses")
-        .where("user", "==", user)
-        .get().then((querySnapshot) => {
+
+    var startDate = null
+    var endDate = null
+
+    if (startDateValue != "") { 
+        startDate = new Date(Date.parse(startDateValue));
+        startDate.setHours(0,0,0,0);
+    }
+    if (endDateValue != "") {
+        endDate = new Date(Date.parse(endDateValue));
+        endDate.setHours(0,0,0,0);
+    }
+    
+    await db.collection("expenses").where("user", "==", user).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            content += `<li class="row m-1 p-2 rounded ${doc.data()["category"]}"><span class="font-weight-bold col">${doc.data()["name"]}</span>`
-            content += `<span class="col text-right font-weight-bold">${doc.data()["price"]} zł</span>`
-            content += `<span hidden>${doc.data()["date"]}</span>`
-            if(doc.data()["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${doc.data()["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
+            let data = doc.data()
+            var expenseDate = new Date(Date.parse(data["date"]));
+            let expenseCategory = data["category"]
+            expenseDate.setHours(0,0,0,0);
+
+            if (category != "none" && category != expenseCategory) { return }
+            if (startDate != null && startDate > expenseDate) { return }
+            if (endDate != null && endDate < expenseDate) { return }
+
+            content += `<li class="row m-1 p-2 rounded ${expenseCategory}"><span class="font-weight-bold col">${data["name"]}</span>`
+            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span>`
+            content += `<span hidden>${data["date"]}</span>`
+            if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
             content += `</li>`
         });
     });
     content +='</ul>'
-    //document.getElementById('expenseslist').text = content;
     $("#expenseslist").replaceWith(content)
 }
+
+function resetExpenseFilters() {
+    document.getElementById("category-filter").value = "none";
+    document.getElementById("start-date").value = null;
+    document.getElementById("end-date").value = null;
+    readExpenses();
+}
+
 const casflowsBtn = document.getElementById("cashFlows");
-if (cashFlows) {
-    casflowsBtn.addEventListener(
-        "click",
-        readExpenses,
-        false
-    )
-}
-function filterExpenses() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('category');
-    ul = document.getElementById("expenseslist");
-    li = ul.getElementsByTagName('li');
+const applyFiltersBtn = document.getElementById("applyFilters-btn");
+const resetFiltersBtn = document.getElementById("resetFilters-btn");
 
-    for (i = 0; i < li.length; i++) {
-        console.log(input.value)
-        if (li[i].classList.contains(input.value.split(' ')[0])) {
-            console.log("SDds")
-            li[i].style.display = "block";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
+casflowsBtn.addEventListener("click", readExpenses, false)
+applyFiltersBtn.addEventListener("click", readExpenses, false)
+resetFiltersBtn.addEventListener("click", resetExpenseFilters, false)

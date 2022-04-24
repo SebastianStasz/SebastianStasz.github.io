@@ -60,11 +60,12 @@
 
                         <div id="page-cashFlows" class="inactive">
                             <h1 class="mt-4 mb-4">Lista wydatków</h1>
-                            <button onclick="toggleCashFlowFilter()" class="btn btn-tertiary mb-4">Filtruj</button>
+                            <button onclick="toggleCashFlowFilter()" class="btn btn-tertiary mb-4">Filtry</button>
                             <div id="cash-flow-filter">
                                 <div class="form-group">
                                     <label for="category">Kategoria:</label>
-                                    <select id="category" onclick="filterExpenses()" name="category" class="form-control">
+                                    <select id="category-filter" onclick="filterExpenses()" name="category" class="form-control">
+                                        <option value="none">Brak</option>
                                         <option value="transport">Transport</option>
                                         <option value="artykuły spożywcze">Artykuły spożywcze</option>
                                         <option value="dom">Dom</option>
@@ -79,6 +80,8 @@
                                     <label for="end-date">Data końcowa:</label>
                                     <input type="date" id="end-date" name="end-date" class="form-control">
                                 </div>
+                                <button id="applyFilters-btn" class="btn btn-primary">Zatwierdź</button>
+                                <button id="resetFilters-btn" class="btn btn-secondary">Resetuj</button>
                                 <hr class="dashed">
                             </div>
                             <div id="overlayDiv" style="display: none">
@@ -184,6 +187,8 @@
                                 x.style.display = "none";
                             }
                         }
+
+                        toggleCashFlowFilter();
                     </script>
                     <script src="js/getStatistics.js"></script>
                     <script src="js/saveExpense.js"></script>
