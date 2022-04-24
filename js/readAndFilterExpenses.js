@@ -13,7 +13,7 @@ const readExpenses = async () => {
             let data = doc.data()
             var expenseDate = Date.parse(data["date"])
             let expenseCategory = data["category"]
-            expenseDate.toDate().setHours(0,0,0,0);
+            expenseDate.toDate.setHours(0,0,0,0);
 
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
