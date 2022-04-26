@@ -28,7 +28,7 @@ const readExpenses = async () => {
             if (startDate != null && startDate > expenseDate) { return }
             if (endDate != null && endDate < expenseDate) { return }
             
-            content += `<div class="${expenseCategory} pb-4 pt-1 mb-3 rounded"><div class="d-flex justify-content-between">`
+            content += `<div class="${expenseCategory} pb-2 pt-1 mb-3 rounded"><div class="d-flex justify-content-between">`
             content += `<span class="font-weight-bold col">${data["name"]}</span>`
             content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span></div><div class="mt-1">`
             content += `<span class="col">${expenseDate.toLocaleDateString("en-US")}</span>`
