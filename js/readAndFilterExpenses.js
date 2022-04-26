@@ -3,7 +3,7 @@ const readExpenses = async () => {
     const category = document.getElementById("category-filter").value;
     const startDateValue = document.getElementById("start-date").value;
     const endDateValue = document.getElementById("end-date").value;
-    let content = ''
+    let content = '<div id="expenseslist">'
 
     var startDate = null
     var endDate = null
@@ -38,7 +38,7 @@ const readExpenses = async () => {
                 content += `<button class="photo float-right btn btn-primary mr-3" id="${data["fileName"]}">Photo</button>`
             }
 
-            content += `</div></div>`
+            content += `</div></div></div>`
         });
     });
     $("#expenseslist").replaceWith(content)
