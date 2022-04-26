@@ -38,8 +38,9 @@ const readExpenses = async () => {
                 content += `<button class="photo float-right btn btn-primary mr-3" id="${data["fileName"]}">Photo</button>`
             }
 
-            content += `</div></div></div>`
+            content += `</div></div>`
         });
+        content += `</div>`
     });
     $("#expenseslist").replaceWith(content)
 }
