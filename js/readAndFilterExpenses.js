@@ -3,7 +3,7 @@ const readExpenses = async () => {
     const category = document.getElementById("category-filter").value;
     const startDateValue = document.getElementById("start-date").value;
     const endDateValue = document.getElementById("end-date").value;
-    let content = '<ul class="list-group" id="expenseslist">'
+    let content = ''
 
     var startDate = null
     var endDate = null
@@ -27,15 +27,20 @@ const readExpenses = async () => {
             if (category != "none" && category != expenseCategory) { return }
             if (startDate != null && startDate > expenseDate) { return }
             if (endDate != null && endDate < expenseDate) { return }
-            content += `<li class="row m-1 pt-2 pb-2 rounded ${expenseCategory}"><div class="d-flex justify-content-between"><span class="font-weight-bold col">${data["name"]}</span>`
-            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span></div>`
-            content += `<p>${expenseDate.toLocaleDateString("en-US")}</p>`
-            content += `<input type='button' value='Delete' class='delete float-right btn btn-secondary' onclick='delete_expense("${doc.id}")'>`;
-            if(data["fileName"] != "")content += `<span class="col"><button class="photo float-right btn btn-light" id="${data["fileName"]}">PHOTO</button></span>`; else content += "<span class='col'></span>"
-            content += `</li>`
+            
+            content += `<div class="${expenseCategory} pb-4 pt-1 mb-3 rounded"><div class="d-flex justify-content-between">`
+            content += `<span class="font-weight-bold col">${data["name"]}</span>`
+            content += `<span class="col text-right font-weight-bold">${data["price"]} zł</span></div><div class="mt-1">`
+            content += `<span class="col">${expenseDate.toLocaleDateString("en-US")}</span>`
+            content += `<input type='button' value='Delete' class='delete float-right btn btn-danger mr-3' onclick='delete_expense("${doc.id}")'>`
+
+            if (data["fileName"] != "") {
+                content += `<button class="photo float-right btn btn-primary mr-3" id="${data["fileName"]}">Photo</button>`
+            }
+
+            content += `</div></div>`
         });
     });
-    content +='</ul>'
     $("#expenseslist").replaceWith(content)
 }
 
