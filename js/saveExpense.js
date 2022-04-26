@@ -22,6 +22,7 @@ const submitForm = async () => {
     if (file) fileRef.put(file)
     await addExpense({name, price, user, category, date, fileName})
     clearForm();
+    navigator.vibrate(1000);
 };
 
 const submitBtn = document.getElementById("save-btn");
